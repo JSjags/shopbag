@@ -1,91 +1,47 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+import {inter, poppins} from "./font";
+import Image from "next/image";
 
-const inter = Inter({ subsets: ['latin'] })
+const getAllProducts = async () => {
+  const data = await fetch('https://fakestoreapi.com/products')
+  return await data.json()
+}
 
-export default function Home() {
+export default async function Home() {
+  const products = await getAllProducts()
+    const heroProduct = products[0]
+
+  console.log(products[0])
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.jsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className={`${poppins.variable} flex-1 b-red-50 p-5`}>
+  <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold `}>Home</h1>
+    {/*  banner */}
+      <div className={`w-full h-[20vmax] shadow-xl border border-slate-2 border-solid relative rounded-lg mt-5`}>
+    <Image src={heroProduct.image} alt={"hero-banner"} width={200} height={200} className={"z-10 block absolute left-[50%] top-0 -translate-x-1/2 -translate-y-5 mix-blend-multiply mt-2"} />
+        <p className={"absolute top-5 right-5 font-poppins text-white px-3 text-sm after:w-full after:h-full after:block after:absolute after:bottom-0 after:left-0 after:-skew-x-[45deg] after:bg-[#da5726] after:border-xl after:-z-[1]"}>{heroProduct.category}</p>
+        <h1 className={`font-poppins text-2xl font-bold text-[#da5726] relative z-20 w-1/2 p-5 after:w-[30px] after:h-[6px] after:block after:absolute after:bottom-[10px] after:left-5 after:-skew-x-[45deg] after:bg-[#591f27] after:border-xl`}>{heroProduct.title}</h1>
+      <div className={"flex justify-between items-end p-5"}>
+        <p className={"max-w-[240px] text-[#591f27]"}>{heroProduct.description}</p>
+        <div className={"flex flex-col items-end "}>
+          <p className={"text-5xl font-black self-end text-[#da5726]"}><span className={"text-[#591f27]"}>$</span><span className={"text-[#da5726]"}>{heroProduct.price}</span></p>
+          <button className={"block bg-[#591f27] rounded-lg font-inter font-semibold px-3 py-2 mt-3 text-white"}>Buy Now</button>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
+      </div>
+    {/* featured products */}
+      <section >
+        <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold mt-7`}>Featured Products</h1>
+        <div className={`w-full h-[20vmax] shadow-xl border border-slate-2 border-solid rounded-lg mt-5 snap-x`}>
+          {products.slice(1, 10).map((product, index) => (
+              <div key={index} className={"snap-center w-[100px]"}>
+                <Image src={product.image} alt={"hero-banner"} width={200} height={200} className={"z-10 block mt-2"} />
+                <h2></h2>
+                <div>
+                  <button>Add to cart</button>
+                </div>
+              </div>
+          ))}
         </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
     </main>
   )
 }
