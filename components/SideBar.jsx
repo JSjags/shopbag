@@ -9,11 +9,11 @@ const fetchCategories = async () => {
 async function SideBar(props) {
     const categories = await fetchCategories()
     return (
-        <aside className={"flex basis-52 shrink-0 grow-0 h-[100%] bg-[#591f27] sticky top-0 flex-col p-5 shadow-xl"}>
+        <aside className={"flex w-1/6 min-w-[200px] max-w-[320px] h-[100%] bg-[#591f27] sticky top-0 flex-col p-5 shadow-xl"}>
             <p className={`${poppins.variable} font-poppins text-slate-400 mb-3`}>Categories</p>
             <ul className={"flex flex-col gap-2 sticky top-0 "}>
                 {categories.map((category, index) => (
-                    <Link href={`/${category}`}>
+                    <Link key={index} href={`/${category}`}>
                         <li key={index} className={`${inter.variable} text-white font-inter capitalize`}>{category}</li>
                     </Link>
                 ))}

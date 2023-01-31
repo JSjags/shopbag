@@ -12,10 +12,10 @@ export default async function Home() {
 
   console.log(products[0])
   return (
-    <main className={`${poppins.variable} flex-1 b-red-50 p-5`}>
+    <main className={`${poppins.variable} flex-1 p-5 w-5/6`}>
   <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold `}>Home</h1>
     {/*  banner */}
-      <div className={`w-full h-[20vmax] shadow-xl border border-slate-2 border-solid relative rounded-lg mt-5`}>
+      <div className={`flex-1 shadow-xl border border-slate-2 border-solid relative rounded-lg mt-5 w-full`}>
     <Image src={heroProduct.image} alt={"hero-banner"} width={200} height={200} className={"z-10 block absolute left-[50%] top-0 -translate-x-1/2 -translate-y-5 mix-blend-multiply mt-2"} />
         <p className={"absolute top-5 right-5 font-poppins text-white px-3 text-sm after:w-full after:h-full after:block after:absolute after:bottom-0 after:left-0 after:-skew-x-[45deg] after:bg-[#da5726] after:border-xl after:-z-[1]"}>{heroProduct.category}</p>
         <h1 className={`font-poppins text-2xl font-bold text-[#da5726] relative z-20 w-1/2 p-5 after:w-[30px] after:h-[6px] after:block after:absolute after:bottom-[10px] after:left-5 after:-skew-x-[45deg] after:bg-[#591f27] after:border-xl`}>{heroProduct.title}</h1>
@@ -30,10 +30,10 @@ export default async function Home() {
     {/* featured products */}
       <section >
         <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold mt-7`}>Featured Products</h1>
-        <div className={`w-full h-[20vmax] shadow-xl border border-slate-2 border-solid rounded-lg mt-5 snap-x`}>
+        <div className={`w-[100%] h-[20vmax] shadow-xl border border-slate-2 border-solid rounded-lg mt-5 px-3 pb-3 snap-x flex gap-3 overflow-x-hidden`}>
           {products.slice(1, 10).map((product, index) => (
-              <div key={index} className={"snap-center w-[100px]"}>
-                <Image src={product.image} alt={"hero-banner"} width={200} height={200} className={"z-10 block mt-2"} />
+              <div key={index} className={"snap-start w-[440px] bg-blue-500 "}>
+                <Image src={product.image} alt={"hero-banner"} width={200} height={200} className="shadow-xl z-10 border-rounded mt-2 w-full" />
                 <h2></h2>
                 <div>
                   <button>Add to cart</button>
