@@ -9,12 +9,18 @@ const fetchCategories = async () => {
 async function SideBar(props) {
     const categories = await fetchCategories()
     return (
-        <aside className={"flex w-1/6 min-w-[200px] max-w-[320px] h-[100%] bg-[#591f27] sticky top-0 flex-col p-5 shadow-xl"}>
-            <p className={`${poppins.variable} font-poppins text-slate-400 mb-3`}>Categories</p>
+        <aside className={"flex w-1/6 min-w-[200px] max-w-[320px] h-[calc(100vh-50px)] bg-[#591f27] sticky top-0 flex-col shadow-xl"}>
+            <Link href={`/`}>
+                <p className={`${inter.variable} font-inter capitalize mb-2 px-5 mt-5 text-[#da5726]`}>Home</p>
+            </Link>
+            <Link href={`/all-products`}>
+                <p className={`${inter.variable} text-white font-inter capitalize mb-2 px-5`}>All Products</p>
+            </Link>
+            <p className={`${poppins.variable} font-poppins font-semibold mt-3 mb-3 bg-white px-5 py-2 text-[#591f27]`}>Categories</p>
             <ul className={"flex flex-col gap-2 sticky top-0 "}>
                 {categories.map((category, index) => (
                     <Link key={index} href={`/${category}`}>
-                        <li key={index} className={`${inter.variable} text-white font-inter capitalize`}>{category}</li>
+                        <li key={index} className={`${inter.variable} text-white font-inter capitalize px-5`}>{category}</li>
                     </Link>
                 ))}
             </ul>

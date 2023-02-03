@@ -1,5 +1,6 @@
 import {inter, poppins} from "./font";
 import Image from "next/image";
+import ItemCard from "@/components/ItemCard";
 
 const getAllProducts = async () => {
   const data = await fetch('https://fakestoreapi.com/products')
@@ -10,9 +11,8 @@ export default async function Home() {
   const products = await getAllProducts()
     const heroProduct = products[0]
 
-  console.log(products[0])
   return (
-    <main className={`${poppins.variable} flex-1 p-5 w-5/6`}>
+    <main className={`${poppins.variable} flex-1 p-5 w-5/6 h-[calc(100vh-50px)] overflow-y-scroll`}>
   <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold `}>Home</h1>
     {/*  banner */}
       <div className={`flex-1 shadow-xl border border-slate-2 border-solid relative rounded-lg mt-5 w-full`}>
@@ -30,20 +30,9 @@ export default async function Home() {
     {/* featured products */}
       <section >
         <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold mt-7`}>Featured Products</h1>
-        <div className={`w-[100%] h-[22vmax] shadow-xl border border-slate-2 border-solid rounded-lg mt-5 px-3 pt-3 pb-3 snap-x flex gap-3 overflow-x-scroll`}>
-          {products.slice(1, 10).map((product, index) => (
-              <div key={index} className={"block min-w-[200px] w-1/4 rounded-xl shadow-xl bg-neutral-100 border border-solid border-neutral-200"}>
-                <div className="h-3/6 overflow-hidden rounded-md shadow-sm bg-white p-2">
-                  <Image src={product.image} alt={"featured product"} width={200} height={200} className="z-10 border-rounded h-full object-contain aspect-square" />
-                </div>
-                <div className="h-3/6 flex flex-col justify-between p-2 h-max gap-1">
-                  <h2 className="line-clamp-2 text-[#da5726] font-poppins font-bold">{product.title}</h2>
-                  <p className={"text-lg font-bold text-right text-[#da5726]"}><span className={"text-[#591f27]"}>$</span><span className={"text-[#da5726]"}>{heroProduct.price}</span></p>
-                  <div className="w-full bg-yellow-50 rounded-md overflow-hidden">
-                    <button className="block w-full border-0 p-2 bg-[#591f27] text-white font-bold rounded-md ">Add to cart</button>
-                  </div>
-                </div>
-              </div>
+        <div className={`w-[100%] h-[23vmax] shadow-xl scroll-px-3 border border-slate-2 border-solid rounded-lg mt-5 px-3 pt-3 pb-3 snap-x flex gap-3 overflow-x-scroll`}>
+          {products.slice(1, 10).map((item, index) => (
+              <ItemCard key={index} product={item} />
           ))}
         </div>
       </section>
