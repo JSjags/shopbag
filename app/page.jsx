@@ -1,10 +1,33 @@
 import {inter, poppins} from "./font";
 import Image from "next/image";
 import ItemCard from "@/components/ItemCard";
+import Link from "next/link";
 
 const getAllProducts = async () => {
   const data = await fetch('https://fakestoreapi.com/products')
   return await data.json()
+}
+
+const generateLink = (item) => {
+  let link;
+  switch (item.category) {
+    case "men's clothing":
+      link = `/clothing/men/${item.id}`
+    break;
+    case "women's clothing":
+      link = `/clothing/women/${item.id}`
+      break;
+      case "electronics/":
+        link = `/clothing/men/${item.id}`
+      break;
+      case "jewelery":
+      link = `/jewellery/${item.id}`
+      break;
+    default:
+      link = "/all-products"
+      break;
+  }
+  return link;
 }
 
 export default async function Home() {
@@ -30,9 +53,11 @@ export default async function Home() {
     {/* featured products */}
       <section >
         <h1 className={`${poppins.variable} font-poppins text-[#591f27] text-3xl font-bold mt-7`}>Featured Products</h1>
-        <div className={`w-[100%] h-[23vmax] shadow-xl scroll-px-3 border border-slate-2 border-solid rounded-lg mt-5 px-3 pt-3 pb-3 snap-x flex gap-3 overflow-x-scroll`}>
+        <div className={`w-[100%] h-fit shadow-xl scroll-px-3 border border-slate-2 border-solid rounded-lg mt-5 px-3 pt-3 pb-3 snap-x flex gap-3 overflow-x-scroll`}>
           {products.slice(1, 10).map((item, index) => (
-              <ItemCard key={index} product={item} />
+              <Link key={index} href={generateLink(item)}>
+                <ItemCard product={item} />
+              </Link>
           ))}
         </div>
       </section>

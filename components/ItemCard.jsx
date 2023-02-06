@@ -20,7 +20,7 @@ export default function ItemCard({product}) {
     const [itemQuantity, setItemQuantity] = useState(1)
 
     return (
-        <div className={"relative block min-w-[200px] w-1/4 rounded-xl shadow-xl bg-neutral-100 border border-solid border-neutral-200 cursor-pointer hover:scale-[1.05] hover:ease hover:duration-[300ms]"}>
+        <div className={"relative block min-w-[200px] w-1/4 rounded-md shadow-xl bg-neutral-100 border border-solid border-slate-200 cursor-pointer hover:scale-[1.05] hover:ease hover:duration-[300ms]"}>
             <div>{<CategoryIcon category={product.category} /> }</div>
             <div className="h-3/6 overflow-hidden rounded-md shadow-sm bg-white p-2">
                 <Image src={product.image} alt={"featured product"} width={200} height={200} className="z-10 border-rounded h-full object-contain aspect-square" />
@@ -30,16 +30,36 @@ export default function ItemCard({product}) {
                 <p className={"text-sm font-600 text-right text-[#da5726]"}><span className={"text-[#591f27]"}>$</span><span className={"text-[#da5726]"}>{formatMoney(product.price.toLocaleString("en-US"))}</span></p>
                 <div className="w-full rounded-md overflow-hidden">
                     {!selected ? (
-                        <button onClick={() => setSelected(!selected)} className="block w-full border-0 p-2 bg-[#591f27] text-white font-bold rounded-md ">Add to cart</button>
+                        <button onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault()
+                            setSelected(!selected)
+                        }
+                        } className="block w-full border-0 p-2 bg-[#591f27] text-white font-bold rounded-md ">Add to cart</button>
 
                     ) : (
                         <div className="flex gap-1">
-                            <button onClick={() => setSelected(!selected)} className="block w-3/4 border-0 p-2 bg-[#da5726] text-white font-bold rounded-md ">Remove</button>
+                            <button onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                                setSelected(!selected)
+                            }
+                            } className="block w-3/4 border-0 p-2 bg-[#da5726] text-white font-bold rounded-md ">Remove</button>
                             <div className="flex w-1/4 bg-white rounded-md">
                                 <input readOnly value={itemQuantity} className="block w-2/4 h-full font-inter pl-1 rounded-md" />
                                 <div className="flex flex-col w-2/4 justify-between">
-                                    <button onClick={() => itemQuantity < 10 && setItemQuantity((prev) => prev + 1)}><Image src={caretUp} alt="increase" width={16} height={16} /></button>
-                                    <button onClick={() =>  itemQuantity > 1 && setItemQuantity((prev) => prev - 1)}><Image src={caretUp} alt="decrease" width={16} height={16} className="rotate-180"/></button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault()
+                                        itemQuantity < 10 && setItemQuantity((prev) => prev + 1);
+                                    }
+                                    }><Image src={caretUp} alt="increase" width={16} height={16} /></button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation()
+                                        e.preventDefault()
+                                        itemQuantity > 1 && setItemQuantity((prev) => prev - 1);
+                                    }
+                                    }><Image src={caretUp} alt="decrease" width={16} height={16} className="rotate-180"/></button>
                                 </div>
                             </div>
                             </div>
