@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
         head.jsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head/>
-      <body className="h-[100vh] w-full max-w-[1440px] mx-auto">
+      <body className="h-[100vh] w-full max-w-[1440px] mx-auto overflow-y-hidden">
       <Header />
       <div className={"h-[calc(100vh-50px)] flex relative w-full"}>
           <SideBar />

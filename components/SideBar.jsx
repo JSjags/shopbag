@@ -1,6 +1,7 @@
 import React from 'react';
 import {inter, poppins} from "@/app/font";
 import Link from "next/link";
+import {generateLink} from "@/lib/path";
 
 const fetchCategories = async () => {
     const data = await fetch('https://fakestoreapi.com/products/categories')
@@ -8,6 +9,7 @@ const fetchCategories = async () => {
 }
 async function SideBar(props) {
     const categories = await fetchCategories()
+
     return (
         <aside className={"flex w-1/6 min-w-[200px] max-w-[320px] h-[calc(100vh-50px)] bg-[#591f27] sticky top-0 flex-col shadow-xl"}>
             <Link href={`/`}>
@@ -16,11 +18,11 @@ async function SideBar(props) {
             <Link href={`/all-products`}>
                 <p className={`${inter.variable} text-white font-inter capitalize mb-2 px-5`}>All Products</p>
             </Link>
-            <p className={`${poppins.variable} font-poppins font-semibold mt-3 mb-3 bg-white px-5 py-2 text-[#591f27]`}>Categories</p>
+            <p className={`${poppins.variable} font-poppins font-semibold mt-3 mb-3 bg-white px-5 py-2 text-[#591f27] shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)_,_inset_0_2px_4px_rgba(0,0,0,0.6)]`}>Categories</p>
             <ul className={"flex flex-col gap-2 sticky top-0 "}>
                 {categories.map((category, index) => (
-                    <Link key={index} href={`/${category}`}>
-                        <li key={index} className={`${inter.variable} text-white font-inter capitalize px-5`}>{category}</li>
+                    <Link key={index} href={`${generateLink(category)}`}>
+                        <li key={index} className={`${inter.variable} text-white font-inter capitalize px-5`}>{category === "jewelery" ? "jewellery" : category}</li>
                     </Link>
                 ))}
             </ul>

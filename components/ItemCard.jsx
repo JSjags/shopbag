@@ -20,8 +20,8 @@ export default function ItemCard({product}) {
     const [itemQuantity, setItemQuantity] = useState(1)
 
     return (
-        <div className={"relative block min-w-[200px] w-1/4 rounded-md shadow-xl bg-neutral-100 border border-solid border-slate-200 cursor-pointer hover:scale-[1.05] hover:ease hover:duration-[300ms]"}>
-            <div>{<CategoryIcon category={product.category} /> }</div>
+        <div className={"relative m-0 block min-w-[200px] w-1/4 rounded-md shadow-xl bg-neutral-100 border border-solid border-slate-200 cursor-pointer hover:scale-[1.05] hover:ease hover:duration-[300ms]"}>
+            <div><CategoryIcon category={product.category} /> </div>
             <div className="h-3/6 overflow-hidden rounded-md shadow-sm bg-white p-2">
                 <Image src={product.image} alt={"featured product"} width={200} height={200} className="z-10 border-rounded h-full object-contain aspect-square" />
             </div>
