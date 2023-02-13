@@ -3,16 +3,16 @@
 import Image from "next/image";
 import {formatMoney} from "@/lib/figures";
 import {useState} from "react";
+import {IoManOutline as MenCategory, IoWomanOutline as FemaleCategory} from "react-icons/io5";
+import {GiProcessor as Processor, GiNecklace as Jewellery} from "react-icons/gi";
 import caretUp from "@/assets/caret-up.svg";
-import mensCategory from "@/assets/mens-category.svg"
-import womensCategory from "@/assets/womens-category.svg"
 import jewelery from "@/assets/jewelery.svg"
 import electronics from "@/assets/electronics.svg"
 const CategoryIcon = ({category}) => {
-    if(category === "men's clothing") return <Image src={mensCategory} alt="Men's clothing" title="men's clothing" width={16} height={16} className="absolute right-1 top-1 rounded-[6px]"/>
-    if(category === "women's clothing") return <Image src={womensCategory} alt="Women's clothing" title="women's clothing" width={16} height={16} className="absolute right-1 top-1 rounded-[6px]"/>
-    if(category === "electronics") return <div className="bg-[#da5726] absolute right-1 top-1 rounded-[6px]"><Image src={electronics} alt="electronics" title="Electronics" width={16} height={16} className=""/></div>
-    if(category === "jewelery") return <div className="bg-[#da5726] absolute right-1 top-1 rounded-[6px]"><Image src={jewelery} alt="jewelery" title="Jewelery" width={16} height={16} className=""/></div>
+    if(category === "men's clothing") return <MenCategory alt="Men's clothing" title="Men's clothing" width={16} height={16} className="absolute right-1 top-1 rounded-[6px] text-[#da5726]"/>
+    if(category === "women's clothing") return <FemaleCategory alt="Women's clothing" title="Women's clothing" width={16} height={16} className="absolute right-1 top-1 rounded-[6px] text-[#da5726]"/>
+    if(category === "electronics") return <Processor alt="electronics" title="Electronics" width={16} height={16} className="absolute right-1 top-1 rounded-[6px] text-[#da5726]"/>
+    if(category === "jewelery") return <Jewellery alt="jewelery" title="Jewellery" width={16} height={16} className="absolute right-1 top-1 rounded-[6px] text-[#da5726]"/>
 }
 
 export default function ItemCard({product}) {
